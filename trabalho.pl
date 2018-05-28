@@ -68,27 +68,29 @@ n_elementos([_|L], N):-
 
 retira_primeiro([_|T], T).
 
-%7. Tire elemento (nao funciona ainda):
-tire_elemento(1,[_|T], T).
-tire_elemento(N, [_|T], R):-
-	N >1,
-	N1 is N-1,
-	tire_elemento(N1,T,R).
+%7. Tire elemento (pela posiçao):
+% Exemlpo:  tire_elemento(X,[1,2,3],3,L).
+tire_elemento(X, [X|T], 1, T).
+tire_elemento(X, [Y|Xs], K, [Y|Ys]):-
+	K >1,
+	K1 is K-1,
+	tire_elemento(X,Xs,K1,Ys).
 
 
+%7.2 Tire elemento (pelo elemento):
+
+tire_elemento2(X, [X|Y], Y).
+tire_elemento2(X, [Y|T1], [Y|T2]):-
+	tire_elemento2(X,T1,T2).
 
 
-
-
-
-
-
-
-
-
-
-
-
+%retirar ocorrências de uma lista:
+retirar_ocor(_,[],[]).
+retirar_ocor(X, [X|Xs], Y):-
+	retirar_ocor(X,Xs,Y).
+retirar_ocor(X, [T|Xs], [T|Y]):-
+       dif(X, T) ,
+	retirar_ocor(X,Xs,Y).
 
 
 
