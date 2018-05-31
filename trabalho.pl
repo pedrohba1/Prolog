@@ -84,13 +84,28 @@ tire_elemento2(X, [Y|T1], [Y|T2]):-
 	tire_elemento2(X,T1,T2).
 
 
-%retirar ocorrências de uma lista:
+%*8 e 9 - retirar ocorrências de uma lista:
 retirar_ocor(_,[],[]).
 retirar_ocor(X, [X|Xs], Y):-
 	retirar_ocor(X,Xs,Y).
 retirar_ocor(X, [T|Xs], [T|Y]):-
-       dif(X, T) ,
+       X \= T ,
 	retirar_ocor(X,Xs,Y).
+
+
+%10. retirar_repetidos:
+pertence(X,[X|_]).
+pertence(X,[_|T]):-
+	pertence(X,T).
+
+
+retire_repet([],[]).
+retire_repet([H|T], L):-
+	pertence(H,T),
+	retire_repet(T,L).
+retire_repet([H|T],[H|T1]):-
+	not(pertence(H,T)),
+	retire_repet(T,T1).
 
 
 
