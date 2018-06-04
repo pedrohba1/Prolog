@@ -81,7 +81,7 @@ tire_elemento(X, [Y|Xs], K, [Y|Ys]):-
 
 tire_elemento2(X, [X|Y], Y).
 tire_elemento2(X, [Y|T1], [Y|T2]):-
-	tire_elemento2(X,T1,T2).
+	tire_elemento2(X,T1,T2),!.
 
 
 %*8 e 9 - retirar ocorrências de uma lista:
@@ -96,7 +96,7 @@ retirar_ocor(X, [T|Xs], [T|Y]):-
 %10. retirar_repetidos:
 pertence(X,[X|_]).
 pertence(X,[_|T]):-
-	pertence(X,T).
+	pertence(X,T),!.
 
 
 retire_repet([],[]).
@@ -108,7 +108,113 @@ retire_repet([H|T],[H|T1]):-
 	retire_repet(T,T1).
 
 
+%11. concatenar duas listas
 
+
+concatenar([],L,L).
+concatenar([H|T],L2, [H|L3]):-
+	concatenar(T,L2,L3).
+
+%12. encontrar o maior elemento:
+
+
+maior([E|[]],E).
+maior([H|T],E):-
+	maior(T,E1),
+	(H >E1 -> E = H; E = E1),!.
+
+%13. encontrar o menor elemento:
+
+
+menor([E|[]], E).
+menor([H|T],E):-
+	menor(T,E1),
+	(H < E1 -> E = H; E= E1),!.
+
+%14.pegar elementos de uma lista dada a lista de suas posições:
+
+pegar([],_,[]).
+pegar([Hp|Tp],L,Lr):-
+	pegar(Tp,L,Lr1),
+	tire_elemento(X,L,Hp,_),
+	inserir_cabeça(X,Lr1,Lr),!.
+
+
+
+
+%15. Inserir o elemento na primeira posição:
+
+inserir_cabeça(E, L, [E|L]).
+
+
+%16.Inserir em uma posiçao N:
+
+
+inserir_N(Elem, 1, L, [Elem|L]).
+inserir_N(Elem, N, [H|T1], [H|L2]):-
+	N >1,
+	N1 is N -1,
+	inserir_N(Elem, N1, T1,L2).
+
+
+%17.Inverter uma lista:
+
+inverter([],[]).
+inverter([H|T],L):-
+	inverter(T,Laux),
+	insere_final(H,Laux,L),!.
+
+%18.substituir um elemento de uma lista por outro elemento:
+%OBS: nesse caso, coloca o X no lugar do Y.
+substitui(X,Y,[X|T],[Y|T]).
+substitui(X,Y,[H|L],[H|Lr]):-
+	substitui(X,Y,L,Lr).
+
+
+%19.Duplicar elementos em uma lista:
+duplicar_todos([],[]).
+duplicar_todos([H|T],[H,H|L]):-
+	duplicar_todos(T,L).
+
+%20. Duplicar um único elemento:
+
+duplicar_um(E,[E|T], [E,E|T]).
+duplicar_um(E, [H|T], [H|L2]):-
+	duplicar_um(E,T,L2),!.
+
+
+%21. Verificar se a intersecção de dois conjuntos
+%não é vazia:
+
+
+vazia([],_).
+vazia([H|L],L2):-
+	vazia(L,L2),
+	not(pertence(H,L2)).
+
+nao_vazia(X,Y):- not(vazia(X,Y)).
+
+%EXTRA: insere final:
+
+insere_final(X, [],[X]).
+insere_final(X,[H|[]],[H,X]).
+insere_final(X,[H|L1],[H|L2]):-
+	insere_final(X,L1,L2).
+
+%22.uniao de dois conjuntos:
+uniao(L1,L2,Lu):-
+	concatenar(L1,L2,Luaux),
+	retire_repet(Luaux,Lu).
+
+%23. Verificar se dois conjuntos são disjuntos:
+
+disjuntos(X,Y):- vazia(X,Y).
+
+%24.verificar se dois conjuntos sao iguais:
+iguais([],_).
+iguais([H|L1],L2):-
+	iguais(L1,L2),
+	pertence(H,L2).
 
 
 
