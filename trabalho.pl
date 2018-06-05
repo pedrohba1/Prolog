@@ -4,16 +4,21 @@
 
 
 %n-ésimo elemento de uma PA feito usando recursão em cauda:
-pa(1,Elem,_,Elem).
-pa(N,First,Ratio, Elem):-
+pat(1,Elem,_,Elem).
+pat(N,First,Ratio, Elem):-
 	N  >1,
 	N1 is N-1,
 	Next is First+Ratio,
-	pa(N1,Next,Ratio,Elem).
+	pat(N1,Next,Ratio,Elem).
 
-%Soma dos termos da PA feito usando recursao em cauda:
-
-
+%n-ésimo elemento de uma PA feito usando recursão comum:
+pa(1,Elem,_,Elem).
+pa(N,First, Ratio, Elem):-
+	N>1,
+	N1 is N-1,
+	pa(N1,First,Ratio,Elemaux),
+	Elem is Elemaux + Ratio.
+%Soma dos termos da PA feito usando recursao comum:
 somapa(1,First,Ratio,S1):-
 	pa(1,First,Ratio,Elem),
 	S1 is Elem.
@@ -21,8 +26,18 @@ somapa(N,First,Ratio,S):-
 	N>1,
 	pa(N,First,Ratio,Elem),
 	N1 is N-1,
-	somapa(N1,First,Ratio,S1),
-	S is S1 + Elem.
+	somapa(N1,First,Ratio,Saux),
+	S is Saux + Elem.
+
+
+%Soma os termos de uma Pa usando recursão em cauda:
+somapat(1,Elem,_,Elem).
+somapat(N,First,Ratio,S):-
+	N>1,
+	pat(N,First,Ratio,Next),
+	N1 is N-1,
+	somapat(N1,Next,Ratio,S).
+
 
 %itens da questao 3:
 %1.R: X = a.
