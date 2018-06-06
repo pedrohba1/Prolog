@@ -1,4 +1,5 @@
-% This buffer is for notes you don't want to save.
+
+%This buffer is for notes you don't want to save.
 % If you want to create a file, visit that file with C-x C-f,
 % then enter the text in that file's own buffer.
 
@@ -9,8 +10,7 @@ pat(N,First,Ratio, Elem):-
 	N  >1,
 	N1 is N-1,
 	Next is First+Ratio,
-	pat(N1,Next,Ratio,Elem).
-
+	pat(N1,Next,Ratio,Elem),!.
 %n-ésimo elemento de uma PA feito usando recursão comum:
 pa(1,Elem,_,Elem).
 pa(N,First, Ratio, Elem):-
@@ -36,7 +36,7 @@ somapat(N,First,Ratio,S):-
 	N>1,
 	pat(N,First,Ratio,Next),
 	N1 is N-1,
-	somapat(N1,Next,Ratio,S).
+	somapat(N1,Next,Ratio,S),!.
 
 
 %itens da questao 3:
