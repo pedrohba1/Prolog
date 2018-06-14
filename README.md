@@ -1,2 +1,2 @@
-# segundo-trabalho-de-pl
-Segundo trabalho de prolog do Carlinhos Lopes.
+# Prolog
+Tudo que eu fiz em prolog.
