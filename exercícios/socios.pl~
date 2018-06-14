@@ -1,0 +1,16 @@
+socio(joao,aau).
+socio(suzana,aau).
+socio(basilio,aau).
+socio(elvira,aaau).
+
+casados(joao,suzana).
+
+irmaos(basilio,elivra).
+
+irmaos(A,B):-
+	irmaos(B,A), !.
+
+casados(A,B):-
+	casados(B,A),!.
+
+

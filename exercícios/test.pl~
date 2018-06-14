@@ -1,0 +1,30 @@
+% This buffer is for notes you don't want to save.
+% If you want to create a file, visit that file with C-x C-f,
+% then enter the text in that file's own buffer.
+
+loves(romeo, juliet).
+loves(juliet, romeo):-
+	loves(romeo, juliet).
+
+male(albert).
+male(bob).
+
+happy(alice).
+with(alice, albert).
+
+female(alice).
+female(betsy).
+female(diana).
+
+mother(alice, bob).
+father(albert, bob).
+
+Dances(X):-
+	happy(X),
+	with(X,_).
+
+parent(X,Y,Z):-
+	mother(X,Z),
+	father(Y,Z).
+
+
