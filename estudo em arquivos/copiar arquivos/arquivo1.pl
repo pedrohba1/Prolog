@@ -1,2 +1,1 @@
-cao(pitbull).
-sexo(masculino).
+ca3
