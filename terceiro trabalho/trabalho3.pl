@@ -9,7 +9,6 @@ inicio :-
 	write(Animal),
 	nl,
 	write('deseja buscar outro animal?'),
-	removeRespostas,
        verifica_resposta.
 
 /* hipoteses a serem testadas*/
@@ -22,7 +21,7 @@ hipotetiza(pinguim) :- pinguim, !.
 hipotetiza(albatroz) :- albatroz, !.
 hipotetiza(desconhecido). /* nao diagnosticado */
 
-/* regras de identificação do animal */
+/* regras de identificaï¿½ï¿½o do animal */
 leopardo :-
 	mamifero,
 	carnivoro,
@@ -48,11 +47,11 @@ pinguim :-
 	verifica(nada),
 	verifica(branco_e_preto).
 albatroz :-
- passaro,
+	passaro,
 	verifica(aparece_em_estoria_de_marinheiro),
 	verifica(voa).
 
-/* regras de classificação */
+/* regras de classificaï¿½ï¿½o */
 
 mamifero :-
 	verifica(tem_pelo), !.
@@ -114,6 +113,47 @@ verifica_resposta:-
 	get(C),
 	(  C = 110 -> write('fechando'),nl;
 	C = 115 ->inicio;
-	write('resposta não aceita'),nl,
+	write('resposta nï¿½o aceita'),nl,
 	write('digite somente s ou n'),nl,
 	verifica_resposta).
+
+
+
+
+
+menu:-
+       write('escreva 1 para advinhar'),nl,
+       write('escreva 2 para especificar'),nl,
+       write('escreva 3 para evidenciar'),nl,
+       write('escreva 4 para visualizar'),nl,
+       write('escreva 5 para remover respostas'),nl,
+       write('escreva 6 para sair'),nl,
+       read(C),
+       opcao(C).
+
+
+opcao(1):-
+	inicio.
+opcao(2):-
+	write('escreva a caracteristica que quer inserir'),nl,
+	read(Carac),
+	assertz(sim(Carac)).
+
+opcao(4):-
+	listing(sim/1),
+	listing(nao/1).
+
+opcao(5):-
+	removeRespostas.
+
+opcao(6):-
+	removeRespostas,
+	write('fechando...').
+
+
+
+
+
+
+
+

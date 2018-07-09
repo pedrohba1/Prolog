@@ -1,12 +1,6 @@
 
 :- dynamic pai/2.
 
-leia(X):-
-	read(X),
-
-
-
-
 menu:-
 	repeat,
 	consult('/home/pedro/Documentos/Prolog/estudo em arquivos/dados.pl'),

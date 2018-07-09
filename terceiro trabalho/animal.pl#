@@ -107,9 +107,12 @@ removeRespostas :-
 
 
 
-
-
-
+menu:-
+       write('escreva 1 para advinhar'),nl,
+       write('escreva 2 para especificar'),nl,
+       write('escreva 3 para evidenciar'),nl,
+       write('escreva 4 para visualizar'),
+    
 
 
 

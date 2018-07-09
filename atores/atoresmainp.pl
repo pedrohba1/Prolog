@@ -1,0 +1,98 @@
+menu:-
+    consult('atores.pl'),
+    write('1 - listar'),nl,
+    write('2 - adicionar'),nl,
+    write('3 - remover'),nl,
+    write('4 - sair'),nl,
+    write('5- quantos filmes tem um ator'),nl,
+    le_opcao(Op), trata(Op).
+
+verifica(1):-!.
+verifica(2):-!.
+verifica(3):-!.
+verifica(4):-!.
+verifica(5):-!.
+
+le_opcao(R):-
+   le_atomo(R),
+   verifica(R),!.
+le_opcao(R):-
+   nl,
+   write('opcao inexistente!'),nl,
+   menu,
+   le_opcao(R).
+
+trata(1):-
+    listing(ator/4),nl,
+    menu.
+trata(2):-
+    write('Nome: '),
+    le_atomo(N),nl,
+    write('Filme: '),
+    le_atomo(F),nl,
+    write('Ano: '),
+    le_atomo(A),nl,
+    write('Rank: '),
+    le_atomo(R),nl,
+    assertz(ator(N,F,A,R)),
+    tell('atores.pl'),
+    listing(ator/4),
+    told,menu.
+trata(3):-
+    write('Remover ator: '),
+    le_atomo(Remove),
+    retractall(ator(Remove,_,_,_)),
+    tell('atores.pl'),
+    listing(ator/4),
+    told,menu.
+
+trata(4):-
+    write('Fim..'),nl,
+    abort.
+
+trata(5):-
+    write('Ator: '),
+    le_atomo(At),
+    findall(_, ator(At,_,_,_), L),
+    tamanho(L, R), write(R).
+
+
+
+tamanho([],0).
+tamanho([_|L],R):-
+	tamanho(L,R1),
+	R is R1 +1.
+
+
+
+
+le_atomo(A):-
+    le_str(String),
+    name(A,String).
+le_str(String):-
+	get0(Char),
+	le_str_aux(Char,String).
+le_str_aux(-1,[]):-!.
+le_str_aux(10,[]):-!.
+le_str_aux(13,[]):-!.
+le_str_aux(Char,[Char|Resto]):-
+	le_str(Resto).
+
+
+
+:-dynamic (ator/4).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

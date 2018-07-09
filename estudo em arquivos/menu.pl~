@@ -1,5 +1,4 @@
 
-
 :- dynamic pai/2.
 
 menu:-

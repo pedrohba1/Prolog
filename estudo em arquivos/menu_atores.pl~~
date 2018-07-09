@@ -1,0 +1,84 @@
+cadastro:-
+	consult('atores.pl'),
+	write('1 - LISTAR ATORES'),nl,
+	write('2 - ADICIONAR ATOR'),nl,
+	write('3 - REMOVER ATOR'),nl,
+	write('4 - SAIR'),nl,
+	read(G),
+	opcao(G).
+
+	opcao(1):-
+	listing(ator/4).
+
+	opcao(2):-
+	write('DIGITE A BC DO ATOR/4 EM QUESTAO'),nl,
+	le_atomo(Nome),
+	le_atomo(Filme),
+	le_atomo(Ano),
+	le_atomo(Rank),
+	assertz(ator(Nome,Filme,Ano,Rank)),
+	tell('atores.pl'),
+	listing(ator/4),
+	told.
+
+	opcao(3):-
+	write('DIGITE O NOME DO ATOR QUE DESEJA DELETAR'),nl,
+	read(B),
+	removeRespostas(B),
+	write('ATOR REMOVIDO COM SUCESSO'),nl,
+	verifica_reposta.
+
+	removeRespostas(F):-
+	tell('atores.pl'),
+-		retractall(ator(F,,,_)),
+		write('ATOR REMOVIDO COM SUCESSO'),nl,
+		cadastro,
+		told,
+		fail.
+
+
+	verifica_reposta:-
+	write('DESEJA RETORNAR AO MENU ? (S/N)'),nl,
+	read(X),
+	repeat,
+	( X = n, write('fechando...'),nl,!;
+	X = s, cadastro;
+	write('resposta nao aceita: '),nl,
+	 write('DIGITE SOMENTE S OU N'),nl,verifica_reposta).
+
+
+
+le_atomo(A):-
+	le_str(S),
+	name(A,S).
+
+
+le_str(S):-
+	get0(Char),
+	le_str_aux(Char,S).
+
+
+le_str_aux(-1,[]):- !.
+le_str_aux(10,[]):- !.
+
+
+le_str_aux(Char,[Char|Resto]):-
+	le_str(Resto).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,7 +7,7 @@ inicio :-
 	write('deseja buscar outro animal?'),
 	removeRespostas,
 	read(C),
-	( C = s,write('fechando...'),nl,!).
+	( C = n,write('fechando...'),nl,!).
 /* hipoteses a serem testadas*/
 hipotetiza(leopardo) :- leopardo, !.
 hipotetiza(tigre) :- tigre, !.
@@ -18,7 +18,7 @@ hipotetiza(pinguim) :- pinguim, !.
 hipotetiza(albatroz) :- albatroz, !.
 hipotetiza(desconhecido). /* nao diagnosticado */
 
-/* regras de identificação do animal */
+/* regras de identificaï¿½ï¿½o do animal */
 leopardo :-
 	mamifero,
 	carnivoro,
@@ -48,7 +48,7 @@ albatroz :-
 	verifica(aparece_em_estoria_de_marinheiro),
 	verifica(voa).
 
-/* regras de classificação */
+/* regras de classificaï¿½ï¿½o */
 
 mamifero :-
 	verifica(tem_pelo), !.
@@ -77,6 +77,7 @@ pergunta(Pergunta) :-
 	write(Pergunta),
 	write('? '),
 	read(Resposta),
+	verifica(Resposta),
 	nl,
 	trate(Pergunta,Resposta).
 
@@ -103,6 +104,17 @@ removeRespostas :-
 	%abolish(sim/1), abolish(nao/1),dynamic(sim/1),dynamic(nao/1).
 	retractall(sim(_)),
 	retractall(nao(_)).
+
+
+
+
+
+
+
+
+
+
+
 
 
 
