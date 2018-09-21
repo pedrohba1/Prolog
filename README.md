@@ -1,2 +1,2 @@
 # Prolog
-Tudo que eu fiz em prolog.
+Todos so arquivos da mateŕia Prolog.
